@@ -105,3 +105,7 @@ fi
 alias config='/usr/bin/git --git-dir=/Users/blakej/.cfg/ --work-tree=/Users/blakej'
 alias vim="nvim"
 alias vi="nvim"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
