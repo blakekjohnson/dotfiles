@@ -57,7 +57,7 @@ require("lazy").setup({
         local configs = require("nvim-treesitter.configs")
 
 	configs.setup({
-          ensure_installed = { "bash", "markdown" },
+          ensure_installed = { "bash", "markdown", "typescript" },
 	  sync_install = false,
 	  highlight = { enable = true },
 	  indent = { enable = true },
@@ -66,6 +66,10 @@ require("lazy").setup({
         vim.opt.conceallevel = 2
       end
     },
+    -- LSP Zero
+    { "VonHeikemen/lsp-zero.nvim", branch = "v4.x" },
+    -- LSP Config
+    { "neovim/nvim-lspconfig" },
     -- Cmp
     { "hrsh7th/cmp-nvim-lsp" },
     {
@@ -126,3 +130,43 @@ vim.cmd([[
   nnoremap <leader>fh <Cmd>Telescope help_tags<CR>
   nnoremap <leader>ft <cmd>Telescope treesitter<CR>
 ]])
+
+-- LSP Configurations
+vim.opt.signcolumn = "yes"
+local lspconfig_defaults = require("lspconfig").util.default_config
+lspconfig_defaults.capabilities = vim.tbl_deep_extend(
+  'force',
+  lspconfig_defaults.capabilities,
+  require("cmp_nvim_lsp").default_capabilities()
+)
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  desc = 'LSP actions',
+  callback = function(event)
+  end,
+})
+
+local lspconfig = require("lspconfig")
+
+lspconfig.lua_ls.setup {
+  settings = {
+    Lua = {
+      runtime = {
+        version = "LuaJIT",
+      },
+      diagnostics = {
+        globals = {
+          "vim",
+          "require",
+        },
+      },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file("", true)
+      },
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
+}
+
