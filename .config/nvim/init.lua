@@ -57,7 +57,7 @@ require("lazy").setup({
         local configs = require("nvim-treesitter.configs")
 
 	configs.setup({
-          ensure_installed = { "bash", "markdown", "typescript" },
+          ensure_installed = { "bash", "javascript", "markdown", "typescript" },
 	  sync_install = false,
 	  highlight = { enable = true },
 	  indent = { enable = true },
@@ -112,6 +112,8 @@ require("lazy").setup({
     -- Telescope
     { "nvim-lua/plenary.nvim" },
     { "nvim-telescope/telescope.nvim" },
+    -- Nunjucks support
+    { "glench/vim-jinja2-syntax" },
   },
   install = { colorscheme = { "kanagawa" } },
 })
@@ -122,6 +124,8 @@ vim.cmd([[
   set expandtab
   set tabstop=8 softtabstop=0
   set mouse=
+  set colorcolumn=80
+  set cursorline
   nnoremap <C-L><C-L> :set invrelativenumber<CR>
 
   nnoremap <leader>ff <cmd>Telescope find_files<CR>
