@@ -2,6 +2,9 @@ layouts:
   - fullscreen
   - middle-wide
 
+window-margins: true
+window-margin-size: 10
+
 mod1:
   - option
   - shift
